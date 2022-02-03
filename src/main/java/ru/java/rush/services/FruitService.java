@@ -1,20 +1,18 @@
 package ru.java.rush.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.java.rush.entities.FruitEntity;
 import ru.java.rush.repositories.FruitRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class FruitService {
 
     private final FruitRepository fruitRepository;
 
-    public FruitService(FruitRepository repository){
-        this.fruitRepository = repository;
-    }
 
     //создали публичный метод (название любое может быть)
 //на вход принимает сущность и сохраняет ее в базу
@@ -27,10 +25,8 @@ public class FruitService {
         return fruitRepository.findAll(); //реализовали метод внедренного бина
     }
 
-    public void saveAll(FruitEntity fruitEntity){
-        List<FruitEntity> fruitEntityList = new ArrayList<>();
-        fruitEntityList.add(fruitEntity);
-        fruitRepository.saveAll(fruitEntityList);
+    public void saveAll(List<FruitEntity> fruitEntities){
+        fruitRepository.saveAll(fruitEntities);
     }
 
 }

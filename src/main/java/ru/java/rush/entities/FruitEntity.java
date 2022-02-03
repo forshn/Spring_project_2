@@ -1,10 +1,16 @@
 package ru.java.rush.entities;
 
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.With;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+@Accessors
+@Data
 @Entity//помечаем бин как сущность
 @Table(name = "fruit_table")//в этой аннотации можно указать имя создаваемой таблицы
 public class FruitEntity {
@@ -20,37 +26,4 @@ public class FruitEntity {
 
     @Column(name = "provider_code")
     private Integer providerCode;
-
-    public FruitEntity(){ //пустой конструктор
-
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getFruitName() {
-        return fruitName;
-    }
-
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
-    }
-
-    public Integer getProviderCode() {
-        return providerCode;
-    }
-
-    public void setProviderCode(Integer providerCode) {
-        this.providerCode = providerCode;
-    }
-
-    @Override
-    public String toString() {
-        return "FruitEntity{" +
-                "id=" + id +
-                ", fruitName='" + fruitName + '\'' +
-                ", providerCode=" + providerCode +
-                '}';
-    }
 }

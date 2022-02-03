@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.java.rush.entities.FruitEntity;
 import ru.java.rush.services.FruitService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,10 +32,16 @@ public class InitiateUtils implements CommandLineRunner {
         fruitEntity3.setFruitName("fruit3");
         fruitEntity3.setProviderCode(3);
 
+
 //с помощью переменной сервиса вызываем методы сохранения в базу, по разу для одного объекта
-        fruitService.save(fruitEntity1);
-        fruitService.save(fruitEntity2);
-        fruitService.save(fruitEntity3);
+
+
+        List<FruitEntity>  fruitEntityList = new ArrayList<>();
+        fruitEntityList.add(fruitEntity1);
+        fruitEntityList.add(fruitEntity2);
+        fruitEntityList.add(fruitEntity3);
+
+        fruitService.saveAll(fruitEntityList);
 
 //здесь вытаскиваем базу обратно
         List<FruitEntity> all = fruitService.getAll();
