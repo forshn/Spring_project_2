@@ -1,15 +1,13 @@
 package ru.java.rush.entities;
 
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.With;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Accessors
+@Accessors(chain = true)
 @Data
 @Entity//помечаем бин как сущность
 @Table(name = "fruit_table")//в этой аннотации можно указать имя создаваемой таблицы
@@ -26,4 +24,5 @@ public class FruitEntity {
 
     @Column(name = "provider_code")
     private Integer providerCode;
+
 }

@@ -1,54 +1,90 @@
 package ru.java.rush.utils;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import ru.java.rush.entities.FruitEntity;
+import ru.java.rush.entities.ProviderEntity;
 import ru.java.rush.services.FruitService;
+import ru.java.rush.services.ProviderService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class InitiateUtils implements CommandLineRunner {
 
     private final FruitService fruitService;
-
-    public InitiateUtils(FruitService fruitService) {//незабываем конструктор для внедрения
-        this.fruitService = fruitService;
-    }
+    private final ProviderService providerService;
 
     @Override
     public void run(String... args) throws Exception {
-        //создаем несколько сущностей фруктов, через сеттеры заполняем поля
-        FruitEntity fruitEntity1 = new FruitEntity();
-        fruitEntity1.setFruitName("fruit1");
-        fruitEntity1.setProviderCode(1);
 
-        FruitEntity fruitEntity2 = new FruitEntity();
-        fruitEntity2.setFruitName("fruit2");
-        fruitEntity2.setProviderCode(2);
+        List<FruitEntity> fruit = new ArrayList<>(
+                Arrays.asList(
+                        new FruitEntity()
+                                .setFruitName("Fruit1")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),//сюда добавлен метод рандомного числа от 0 до 10
+                        new FruitEntity()
+                                .setFruitName("Fruit2")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit3")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit4")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit5")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit6")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit7")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit8")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
+                        new FruitEntity()
+                                .setFruitName("Fruit9")
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10))
+                )
+        );
 
-        FruitEntity fruitEntity3 = new FruitEntity();
-        fruitEntity3.setFruitName("fruit3");
-        fruitEntity3.setProviderCode(3);
+//инициализируем таблицу с поставщиками
+        List<ProviderEntity> provider = new ArrayList<>(
+                Arrays.asList(
+                        new ProviderEntity()
+                                .setProviderName("Provider1"),
+                        new ProviderEntity()
+                                .setProviderName("Provider2"),
+                        new ProviderEntity()
+                                .setProviderName("Provider3"),
+                        new ProviderEntity()
+                                .setProviderName("Provider4"),
+                        new ProviderEntity()
+                                .setProviderName("Provider5")
+                )
+        );
 
+        fruitService.saveAll(fruit);
 
-//с помощью переменной сервиса вызываем методы сохранения в базу, по разу для одного объекта
-
-
-        List<FruitEntity>  fruitEntityList = new ArrayList<>();
-        fruitEntityList.add(fruitEntity1);
-        fruitEntityList.add(fruitEntity2);
-        fruitEntityList.add(fruitEntity3);
-
-        fruitService.saveAll(fruitEntityList);
-
-//здесь вытаскиваем базу обратно
-        List<FruitEntity> all = fruitService.getAll();
-
-//и выводим что получилось
-        for (FruitEntity entity : all) {
-            System.out.println(entity);
+        System.out.println("\nТаблица фруктов");
+        for (FruitEntity fruitEntity : fruitService.getAll()) {
+            System.out.println(fruitEntity);
         }
+
+        providerService.saveAll(provider);//сохраняем List поставщиков
+
+        System.out.println("\nТаблица поставщиков");
+        for (ProviderEntity providerEntity : providerService.getAll()) {
+            System.out.println(providerEntity);
+        }
+
     }
 }
+
