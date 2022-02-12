@@ -27,7 +27,7 @@ public class InitiateUtils implements CommandLineRunner {
                 Arrays.asList(
                         new FruitEntity()
                                 .setFruitName("Fruit1")
-                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),//сюда добавлен метод рандомного числа от 0 до 10
+                                .setProviderCode(Math.abs(new Random().nextInt() % 10)),
                         new FruitEntity()
                                 .setFruitName("Fruit2")
                                 .setProviderCode(Math.abs(new Random().nextInt() % 10)),
@@ -55,7 +55,7 @@ public class InitiateUtils implements CommandLineRunner {
                 )
         );
 
-//инициализируем таблицу с поставщиками
+
         List<ProviderEntity> provider = new ArrayList<>(
                 Arrays.asList(
                         new ProviderEntity()
@@ -78,14 +78,31 @@ public class InitiateUtils implements CommandLineRunner {
             System.out.println(fruitEntity);
         }
 
-        providerService.saveAll(provider);//сохраняем List поставщиков
+        providerService.saveAll(provider);
 
         System.out.println("\nТаблица поставщиков");
         for (ProviderEntity providerEntity : providerService.getAll()) {
             System.out.println(providerEntity);
         }
 
+        System.out.println("\nТаблица фруктов и их поставщиков\n");
+        for (String join : fruitService.joinString()) {
+            System.out.println(join);
+        }
 
+        System.out.println("\nТаблица фруктов и их поставщиков");
+        for (FruitEntity join : fruitService.joinFruit()) {
+            System.out.println(join);
+        }
+
+        System.out.println("\nТаблица фруктов и их поставщиков");
+        for (String join : fruitService.joinProvider()) {
+            System.out.println(join);
+        }
     }
 }
+
+
+
+
 

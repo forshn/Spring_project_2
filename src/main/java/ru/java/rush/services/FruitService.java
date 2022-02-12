@@ -45,10 +45,23 @@ public class FruitService {
         fruitRepository.saveAll(fruitEntities);
     }
 
-    public List<FruitEntity> findFruitEntityBetweenProviderCode(Integer start, Integer end){
+    //REDO
+    public List<FruitEntity> findFruitEntitiesBetweenProviderCode(Integer start, Integer end){
         return fruitRepository.findAll()
                 .stream()
                 .filter(v -> v.getProviderCode() >= start && v.getProviderCode() <= end)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> joinString(){
+        return fruitRepository.joinSting();
+    }
+
+    public List<FruitEntity> joinFruit(){
+        return fruitRepository.joinFruit();
+    }
+
+    public List<String> joinProvider(){
+        return fruitRepository.joinProvider();
     }
 }
