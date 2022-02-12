@@ -6,7 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Accessors(chain = true) // она позволяет  автоматически сгенерировать сеттеры, которые возвращают this  вместо void и вызывать их в стиле билдера.
+@Accessors(chain = true) // она позволяет автоматически сгенерировать сеттеры,
+// которые возвращают this  вместо void и вызывать их в стиле билдера.
 @Data
 @Entity
 @Table(name = "provider_table")
